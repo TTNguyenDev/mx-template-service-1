@@ -1,14 +1,14 @@
-import { Injectable } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
+import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class ApiConfigService {
   constructor(private readonly configService: ConfigService) { }
 
   getApiUrl(): string {
-    const apiUrl = this.configService.get<string>("urls.api");
+    const apiUrl = this.configService.get<string>('urls.api');
     if (!apiUrl) {
-      throw new Error("No API url present");
+      throw new Error('No API url present');
     }
 
     return apiUrl;
@@ -17,7 +17,7 @@ export class ApiConfigService {
   getContractAbiPath(key: string): string {
     const contractApiPath = this.configService.get<string>(`abi.${key}`);
     if (!contractApiPath) {
-      throw new Error("No swagger urls present");
+      throw new Error(`No contract abi path present - ${key}`);
     }
     return contractApiPath;
   }
@@ -25,7 +25,7 @@ export class ApiConfigService {
   getContractAddress(key: string): string {
     const contractAddress = this.configService.get<string>(`wallet.${key}`);
     if (!contractAddress) {
-      throw new Error("No swagger urls present");
+      throw new Error(`No contract address present - ${key}`);
     }
     return contractAddress;
   }
@@ -34,42 +34,42 @@ export class ApiConfigService {
     const contractAddresses =
       this.configService.get<Record<string, any>>(`wallet`);
     if (!contractAddresses) {
-      throw new Error("No getContractAddresses present");
+      throw new Error('No getContractAddresses present');
     }
     return contractAddresses;
   }
 
   getSwaggerUrls(): string[] {
-    const swaggerUrls = this.configService.get<string[]>("urls.swagger");
+    const swaggerUrls = this.configService.get<string[]>('urls.swagger');
     if (!swaggerUrls) {
-      throw new Error("No swagger urls present");
+      throw new Error('No swagger urls present');
     }
 
     return swaggerUrls;
   }
 
   getRedisUrl(): string {
-    const redisUrl = this.configService.get<string>("urls.redis");
+    const redisUrl = this.configService.get<string>('urls.redis');
     if (!redisUrl) {
-      throw new Error("No redisUrl present");
+      throw new Error('No redisUrl present');
     }
 
     return redisUrl;
   }
 
   getDatabaseHost(): string {
-    const databaseHost = this.configService.get<string>("database.host");
+    const databaseHost = this.configService.get<string>('database.host');
     if (!databaseHost) {
-      throw new Error("No database.host present");
+      throw new Error('No database.host present');
     }
 
     return databaseHost;
   }
 
   getDatabasePort(): number {
-    const databasePort = this.configService.get<number>("database.port");
+    const databasePort = this.configService.get<number>('database.port');
     if (!databasePort) {
-      throw new Error("No database.port present");
+      throw new Error('No database.port present');
     }
 
     return databasePort;
@@ -77,9 +77,9 @@ export class ApiConfigService {
 
   getDatabaseUsername(): string {
     const databaseUsername =
-      this.configService.get<string>("database.username");
+      this.configService.get<string>('database.username');
     if (!databaseUsername) {
-      throw new Error("No database.username present");
+      throw new Error('No database.username present');
     }
 
     return databaseUsername;
@@ -87,18 +87,18 @@ export class ApiConfigService {
 
   getDatabasePassword(): string {
     const databasePassword =
-      this.configService.get<string>("database.password");
+      this.configService.get<string>('database.password');
     if (!databasePassword) {
-      throw new Error("No database.password present");
+      throw new Error('No database.password present');
     }
 
     return databasePassword;
   }
 
   getDatabaseName(): string {
-    const databaseName = this.configService.get<string>("database.name");
+    const databaseName = this.configService.get<string>('database.name');
     if (!databaseName) {
-      throw new Error("No database.name present");
+      throw new Error('No database.name present');
     }
 
     return databaseName;
@@ -126,10 +126,10 @@ export class ApiConfigService {
 
   getIsPublicApiFeatureActive(): boolean {
     const isApiActive = this.configService.get<boolean>(
-      "features.publicApi.enabled"
+      'features.publicApi.enabled',
     );
     if (isApiActive === undefined) {
-      throw new Error("No public api feature flag present");
+      throw new Error('No public api feature flag present');
     }
 
     return isApiActive;
@@ -137,10 +137,10 @@ export class ApiConfigService {
 
   getPublicApiFeaturePort(): number {
     const featurePort = this.configService.get<number>(
-      "features.publicApi.port"
+      'features.publicApi.port',
     );
     if (featurePort === undefined) {
-      throw new Error("No public api port present");
+      throw new Error('No public api port present');
     }
 
     return featurePort;
@@ -148,10 +148,10 @@ export class ApiConfigService {
 
   getIsPrivateApiFeatureActive(): boolean {
     const isApiActive = this.configService.get<boolean>(
-      "features.privateApi.enabled"
+      'features.privateApi.enabled',
     );
     if (isApiActive === undefined) {
-      throw new Error("No private api feature flag present");
+      throw new Error('No private api feature flag present');
     }
 
     return isApiActive;
@@ -159,10 +159,10 @@ export class ApiConfigService {
 
   getPrivateApiFeaturePort(): number {
     const featurePort = this.configService.get<number>(
-      "features.privateApi.port"
+      'features.privateApi.port',
     );
     if (featurePort === undefined) {
-      throw new Error("No private api port present");
+      throw new Error('No private api port present');
     }
 
     return featurePort;
@@ -170,10 +170,10 @@ export class ApiConfigService {
 
   getIsCacheWarmerFeatureActive(): boolean {
     const isCacheWarmerActive = this.configService.get<boolean>(
-      "features.cacheWarmer.enabled"
+      'features.cacheWarmer.enabled',
     );
     if (isCacheWarmerActive === undefined) {
-      throw new Error("No cache warmer feature flag present");
+      throw new Error('No cache warmer feature flag present');
     }
 
     return isCacheWarmerActive;
@@ -181,10 +181,10 @@ export class ApiConfigService {
 
   getCacheWarmerFeaturePort(): number {
     const featurePort = this.configService.get<number>(
-      "features.cacheWarmer.port"
+      'features.cacheWarmer.port',
     );
     if (featurePort === undefined) {
-      throw new Error("No cache warmer port present");
+      throw new Error('No cache warmer port present');
     }
 
     return featurePort;
@@ -192,10 +192,10 @@ export class ApiConfigService {
 
   getIsTransactionProcessorFeatureActive(): boolean {
     const isTransactionProcessorActive = this.configService.get<boolean>(
-      "features.transactionProcessor.enabled"
+      'features.transactionProcessor.enabled',
     );
     if (isTransactionProcessorActive === undefined) {
-      throw new Error("No transaction processor feature flag present");
+      throw new Error('No transaction processor feature flag present');
     }
 
     return isTransactionProcessorActive;
@@ -203,10 +203,10 @@ export class ApiConfigService {
 
   getTransactionProcessorFeaturePort(): number {
     const featurePort = this.configService.get<number>(
-      "features.transactionProcessor.port"
+      'features.transactionProcessor.port',
     );
     if (featurePort === undefined) {
-      throw new Error("No transaction processor port present");
+      throw new Error('No transaction processor port present');
     }
 
     return featurePort;
@@ -214,10 +214,10 @@ export class ApiConfigService {
 
   getTransactionProcessorMaxLookBehind(): number {
     const maxLookBehind = this.configService.get<number>(
-      "features.transactionProcessor.maxLookBehind"
+      'features.transactionProcessor.maxLookBehind',
     );
     if (maxLookBehind === undefined) {
-      throw new Error("No transaction processor max look behind present");
+      throw new Error('No transaction processor max look behind present');
     }
 
     return maxLookBehind;
@@ -225,10 +225,10 @@ export class ApiConfigService {
 
   getIsQueueWorkerFeatureActive(): boolean {
     const isQueueWorkerActive = this.configService.get<boolean>(
-      "features.queueWorker.enabled"
+      'features.queueWorker.enabled',
     );
     if (isQueueWorkerActive === undefined) {
-      throw new Error("No queue worker feature flag present");
+      throw new Error('No queue worker feature flag present');
     }
 
     return isQueueWorkerActive;
@@ -236,40 +236,40 @@ export class ApiConfigService {
 
   getQueueWorkerFeaturePort(): number {
     const featurePort = this.configService.get<number>(
-      "features.queueWorker.port"
+      'features.queueWorker.port',
     );
     if (featurePort === undefined) {
-      throw new Error("No transaction processor port present");
+      throw new Error('No transaction processor port present');
     }
 
     return featurePort;
   }
 
   getSecurityAdmins(): string[] {
-    const admins = this.configService.get<string[]>("security.admins");
+    const admins = this.configService.get<string[]>('security.admins');
     if (admins === undefined) {
-      throw new Error("No security admins value present");
+      throw new Error('No security admins value present');
     }
 
     return admins;
   }
 
   getRateLimiterSecret(): string | undefined {
-    return this.configService.get<string>("rateLimiterSecret");
+    return this.configService.get<string>('rateLimiterSecret');
   }
 
   getAxiosTimeout(): number {
     return (
-      this.configService.get<number>("keepAliveTimeout.downstream") ?? 61000
+      this.configService.get<number>('keepAliveTimeout.downstream') ?? 61000
     );
   }
 
   getIsKeepAliveAgentFeatureActive(): boolean {
-    return this.configService.get<boolean>("keepAliveAgent.enabled") ?? true;
+    return this.configService.get<boolean>('keepAliveAgent.enabled') ?? true;
   }
 
   getServerTimeout(): number {
-    return this.configService.get<number>("keepAliveTimeout.upstream") ?? 60000;
+    return this.configService.get<number>('keepAliveTimeout.upstream') ?? 60000;
   }
 
   getHeadersTimeout(): number {
@@ -277,41 +277,41 @@ export class ApiConfigService {
   }
 
   getUseCachingInterceptor(): boolean {
-    return this.configService.get<boolean>("useCachingInterceptor") ?? false;
+    return this.configService.get<boolean>('useCachingInterceptor') ?? false;
   }
 
   getElasticUrl(): string {
-    const elasticUrls = this.configService.get<string[]>("urls.elastic");
+    const elasticUrls = this.configService.get<string[]>('urls.elastic');
     if (!elasticUrls) {
-      throw new Error("No elastic urls present");
+      throw new Error('No elastic urls present');
     }
 
     return elasticUrls[Math.floor(Math.random() * elasticUrls.length)];
   }
 
   getPoolLimit(): number {
-    return this.configService.get<number>("caching.poolLimit") ?? 100;
+    return this.configService.get<number>('caching.poolLimit') ?? 100;
   }
 
   getProcessTtl(): number {
-    return this.configService.get<number>("caching.processTtl") ?? 60;
+    return this.configService.get<number>('caching.processTtl') ?? 60;
   }
 
   getUseKeepAliveAgentFlag(): boolean {
-    return this.configService.get<boolean>("flags.useKeepAliveAgent") ?? true;
+    return this.configService.get<boolean>('flags.useKeepAliveAgent') ?? true;
   }
 
   getIsAuthActive(): boolean {
-    return this.configService.get<boolean>("api.auth") ?? false;
+    return this.configService.get<boolean>('api.auth') ?? false;
   }
 
   getNativeAuthMaxExpirySeconds(): number {
     return (
-      this.configService.get<number>("nativeAuth.maxExpirySeconds") ?? 86400
+      this.configService.get<number>('nativeAuth.maxExpirySeconds') ?? 86400
     );
   }
 
   getNativeAuthAcceptedOrigins(): string[] {
-    return this.configService.get<string[]>("nativeAuth.acceptedOrigins") ?? [];
+    return this.configService.get<string[]>('nativeAuth.acceptedOrigins') ?? [];
   }
 }
